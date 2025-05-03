@@ -1,0 +1,2 @@
+package com.example.transaction.exception;public class ErrorDetails {
+}
