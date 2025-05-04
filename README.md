@@ -1,5 +1,3 @@
-# Transaction Processor API
-
 A Spring Boot application that processes financial transactions with batch import functionality and secure API endpoints.
 
 ## Overview
@@ -185,6 +183,20 @@ Import the provided Postman collection and environment for easy API testing.
 2. **Date/Time Parsing Error**: Verify the file format matches the expected pattern
 3. **Authentication Failed**: Check if JWT token is valid and properly included in headers
 
+### MVC Pattern
+The overall application structure follows the Model-View-Controller pattern with separation of:
+
+Models (Transaction entity)
+Controllers (handle HTTP requests)
+Services (contain business logic)
+
+These patterns make the code more organized, flexible, testable, and maintainable.
+
 ## Acknowledgments
 
 Built with Spring Boot
+
+
+<img width="493" alt="ActivityDiagramDataFlow" src="https://github.com/user-attachments/assets/d0bc80d8-381d-4f90-b297-c3b691ae7457" />
+<img width="401" alt="System Architecture Diagram" src="https://github.com/user-attachments/assets/6cf3fadb-b11b-4a0a-8f67-fd4f1f86cdf3" />
+
