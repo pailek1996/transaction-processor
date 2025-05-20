@@ -2,7 +2,6 @@ package com.example.transaction.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
@@ -23,11 +23,12 @@ public class JwtTokenProvider {
     private final UserDetailsService userDetailsService;
 
     public JwtTokenProvider(@Value("${jwt.expiration}") long jwtExpirationInMs,
+                            @Value("${jwt.secret}") String jwtSecret,
                             @Lazy UserDetailsService userDetailsService) {
         this.jwtExpirationInMs = jwtExpirationInMs;
         this.userDetailsService = userDetailsService;
-        // Generate a secure key for HS512
-        this.key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        // Use a consistent key derived from the configured secret
+        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
     public String generateToken(Authentication authentication) {
